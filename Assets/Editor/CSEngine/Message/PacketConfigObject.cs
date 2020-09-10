@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace CSEngine
+namespace CSEngine.Editor
 {
     public class PacketConfigObject : SerializedScriptableObject
     {

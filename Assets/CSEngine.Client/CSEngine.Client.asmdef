@@ -1,0 +1,16 @@
+{
+    "name": "CSEngine.Client",
+    "references": [
+        "GUID:b139d7d25965dd1489bb10f715f470ce",
+        "GUID:0e3b8edb25964fa46a7bec25e0a220c2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

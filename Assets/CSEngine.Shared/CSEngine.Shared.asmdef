@@ -1,0 +1,15 @@
+{
+    "name": "CSEngine.Shared",
+    "references": [
+        "GUID:b139d7d25965dd1489bb10f715f470ce"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
