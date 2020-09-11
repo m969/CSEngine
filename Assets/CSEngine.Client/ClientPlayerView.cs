@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CSEngine.Client
 {
     public class ClientPlayerView : MonoBehaviour, IPlayerView
     {
         [SerializeField] private TextMesh _name;
+        [SerializeField] private Image _healthCircle;
         private ClientPlayer _player;
         private Camera _mainCamera;
 
