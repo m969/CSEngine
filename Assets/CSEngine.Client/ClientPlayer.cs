@@ -1,11 +1,27 @@
 using CSEngine.Shared;
 using LiteNetLib;
+using System;
 using UnityEngine;
 
 namespace CSEngine.Client
 { 
     public class ClientPlayer : BasePlayer
     {
+        public Action<byte> HealthAction;
+        public override byte Health
+        {
+            get
+            {
+                return _health;
+            }
+            set
+            {
+                Debug.Log($"Health:{value}");
+                _health = value;
+                HealthAction?.Invoke(value);
+            }
+        }
+
         private PlayerInputPacket _nextCommand;
         private readonly ClientLogic _clientLogic;
         private readonly ClientPlayerManager _playerManager;
@@ -118,6 +134,11 @@ namespace CSEngine.Client
             }
 
             base.Update(delta);
+        }
+
+        public void OnHealthChanged(byte value)
+        {
+            _health = value;
         }
     }
 }

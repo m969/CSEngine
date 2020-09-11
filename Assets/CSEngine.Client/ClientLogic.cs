@@ -110,6 +110,9 @@ namespace CSEngine.Client
 
         private void OnShoot()
         {
+            Debug.Log($"OnShoot");
+            Debug.Log($"OnShoot");
+            Debug.Log($"OnShoot");
             var p = _playerManager.GetById(_cachedShootData.FromPlayer);
             if (p == null || p == _playerManager.OurPlayer)
                 return;

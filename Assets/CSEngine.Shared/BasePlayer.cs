@@ -9,14 +9,16 @@ namespace CSEngine.Shared
         private float _speed = 3f;
         private GameTimer _shootTimer = new GameTimer(0.2f);
         private BasePlayerManager _playerManager;
-        
+
         protected Vector2 _position;
         protected float _rotation;
         protected byte _health;
+        protected byte _maxHealth;
 
         public const float Radius = 0.5f;
         public bool IsAlive => _health > 0;
-        public byte Health => _health;
+        public virtual byte Health { get => _health; set => _health = value; }
+        public byte MaxHealth => _maxHealth;
         public Vector2 Position => _position;
         public float Rotation => _rotation;
         public readonly byte Id;
@@ -45,7 +47,7 @@ namespace CSEngine.Shared
             _playerManager.OnShoot(this, target, player);
             if (player != null)
             {
-                player._health -= 1;
+                player.Health -= 1;
             }
         }
 
@@ -74,7 +76,6 @@ namespace CSEngine.Shared
                     Shoot();
                 }
             }
-            
         }
 
         public virtual void Update(float delta)
