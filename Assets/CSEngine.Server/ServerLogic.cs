@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using CSEngine.Shared;
+using ET;
 using LiteNetLib;
 using LiteNetLib.Utils;
 using UnityEngine;
@@ -11,10 +12,10 @@ namespace CSEngine.Server
     {
         private NetManager _netManager;
         private NetPacketProcessor _packetProcessor;
+        private NetDataWriter _cachedWriter = new NetDataWriter();
 
         public const int MaxPlayers = 64;
         private LogicTimer _logicTimer;
-        private readonly NetDataWriter _cachedWriter = new NetDataWriter();
         private ushort _serverTick;
         private ServerPlayerManager _playerManager;
 
@@ -22,32 +23,34 @@ namespace CSEngine.Server
         private ServerState _serverState;
         public ushort Tick => _serverTick;
 
-        public void StartServer()
-        {
-            if (_netManager.IsRunning)
-                return;
-            _netManager.Start(10515);
-            _logicTimer.Start();
-        }
 
-        private void Awake()
+        public void StartServer()
         {
             DontDestroyOnLoad(gameObject);
             _logicTimer = new LogicTimer(OnLogicUpdate);
-            _packetProcessor = new NetPacketProcessor();
             _playerManager = new ServerPlayerManager(this);
-            
-            //register auto serializable vector2
+
+            //_packetProcessor = new NetPacketProcessor();
+
+            ////register auto serializable vector2
+            //_packetProcessor.RegisterNestedType((w, v) => w.Put(v), r => r.GetVector2());
+
+            ////register auto serializable PlayerState
+            //_packetProcessor.RegisterNestedType<PlayerState>();
+
+            //_packetProcessor.SubscribeReusable<JoinPacket, NetPeer>(OnJoinReceived);
+            //_netManager = new NetManager(this)
+            //{
+            //    AutoRecycle = true
+            //};
+
+            _netManager = Game.CSEngineApp.LiteNet._netManager;
+            _packetProcessor = Game.CSEngineApp.LiteNet._packetProcessor;
             _packetProcessor.RegisterNestedType((w, v) => w.Put(v), r => r.GetVector2());
-           
-            //register auto serializable PlayerState
             _packetProcessor.RegisterNestedType<PlayerState>();
-            
             _packetProcessor.SubscribeReusable<JoinPacket, NetPeer>(OnJoinReceived);
-            _netManager = new NetManager(this)
-            {
-                AutoRecycle = true
-            };
+            _netManager.Start(10515);
+            _logicTimer.Start();
         }
 
         private void OnDestroy()
@@ -71,7 +74,7 @@ namespace CSEngine.Server
                     int statesMax = p.AssociatedPeer.GetMaxSinglePacketSize(DeliveryMethod.Unreliable) - ServerState.HeaderSize;
                     statesMax /= PlayerState.Size;
                 
-                    for (int s = 0; s < (pCount-1)/statesMax + 1; s++)
+                    for (int s = 0; s < (pCount-1) / statesMax + 1; s++)
                     {
                         //TODO: divide
                         _serverState.LastProcessedCommand = p.LastProcessedCommandId;
@@ -83,8 +86,12 @@ namespace CSEngine.Server
             }
         }
 
-        private void Update()
+        public void Update()
         {
+            if(_netManager == null)
+            {
+                return;
+            }
             _netManager.PollEvents();
             _logicTimer.Update();
         }
@@ -155,6 +162,11 @@ namespace CSEngine.Server
         public void SendShoot(ref ShootPacket sp)
         {
             _netManager.SendToAll(WriteSerializable(PacketType.Shoot, sp), DeliveryMethod.ReliableUnordered);
+        }
+
+        public void SendHealth(ref PlayerHealthPacket packet)
+        {
+            _netManager.SendToAll(WriteSerializable(PacketType.Health, packet), DeliveryMethod.Unreliable);
         }
 
         void INetEventListener.OnPeerConnected(NetPeer peer)

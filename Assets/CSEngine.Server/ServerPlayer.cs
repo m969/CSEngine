@@ -10,7 +10,20 @@ namespace CSEngine.Server
         public readonly NetPeer AssociatedPeer;
         public PlayerState NetworkState;
         public ushort LastProcessedCommandId { get; private set; }
-        
+        public override byte Health
+        {
+            get
+            {
+                return _health;
+            }
+            set
+            {
+                _health = value;
+                var packet = new PlayerHealthPacket() { Health = value, Player = Id };
+                Game.CSEngineApp.SendAll(PacketType.Health, packet);
+            }
+        }
+
         public ServerPlayer(ServerPlayerManager playerManager, string name, NetPeer peer) : base(playerManager, name, (byte)peer.Id)
         {
             _playerManager = playerManager;
@@ -44,7 +57,6 @@ namespace CSEngine.Server
                 new Vector2(Position.x, Position.y - sz ),
                 new Vector2(Position.x, Position.y + sz ), 
                 Color.white);
-            
         }
     }
 }

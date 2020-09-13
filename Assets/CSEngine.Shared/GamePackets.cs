@@ -10,7 +10,8 @@ namespace CSEngine.Shared
         Spawn,
         ServerState,
         Serialized,
-        Shoot
+        Shoot,
+        Health,
     }
     
     //Auto serializable packets
@@ -173,6 +174,24 @@ namespace CSEngine.Shared
                 PlayerStates = new PlayerState[PlayerStatesCount];
             for (int i = 0; i < PlayerStatesCount; i++)
                 PlayerStates[i].Deserialize(reader);
+        }
+    }
+
+    public struct PlayerHealthPacket : INetSerializable
+    {
+        public byte Player;
+        public byte Health;
+
+        public void Serialize(NetDataWriter writer)
+        {
+            writer.Put(Player);
+            writer.Put(Health);
+        }
+
+        public void Deserialize(NetDataReader reader)
+        {
+            Player = reader.GetByte();
+            Health = reader.GetByte();
         }
     }
 }

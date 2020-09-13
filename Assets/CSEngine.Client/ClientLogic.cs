@@ -42,7 +42,7 @@ namespace CSEngine.Client
             return eff;
         }
         
-        private void Awake()
+        public void Initialize()
         {
             DontDestroyOnLoad(gameObject);
             Random r = new Random();
@@ -53,17 +53,20 @@ namespace CSEngine.Client
             _writer = new NetDataWriter();
             _playerManager = new ClientPlayerManager(this);
             _shootsPool = new GamePool<ShootEffect>(ShootEffectContructor, 100);
-            _packetProcessor = new NetPacketProcessor();
+
+            _netManager = Game.CSEngineApp.LiteNet._netManager;
+            _packetProcessor = Game.CSEngineApp.LiteNet._packetProcessor;
+            //_packetProcessor = new NetPacketProcessor();
             _packetProcessor.RegisterNestedType((w, v) => w.Put(v), reader => reader.GetVector2());
             _packetProcessor.RegisterNestedType<PlayerState>();
             _packetProcessor.SubscribeReusable<PlayerJoinedPacket>(OnPlayerJoined);
             _packetProcessor.SubscribeReusable<JoinAcceptPacket>(OnJoinAccept);
             _packetProcessor.SubscribeReusable<PlayerLeavedPacket>(OnPlayerLeaved);
-            _netManager = new NetManager(this)
-            {
-                AutoRecycle = true,
-                IPv6Enabled = IPv6Mode.Disabled
-            };
+            //_netManager = new NetManager(this)
+            //{
+            //    AutoRecycle = true,
+            //    IPv6Enabled = IPv6Mode.Disabled
+            //};
             _netManager.Start();
         }
 
@@ -74,6 +77,10 @@ namespace CSEngine.Client
 
         private void Update()
         {
+            if (_netManager == null)
+            {
+                return;
+            }
             _netManager.PollEvents();
             LogicTimer.Update();
             if (_playerManager.OurPlayer != null)

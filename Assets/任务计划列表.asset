@@ -26,6 +26,9 @@ MonoBehaviour:
     Title: "\u96C6\u6210UniTask"
     Description: "\u4EFB\u52A1\u63CF\u8FF0"
   - Enabled: 0
+    Title: "\u96C6\u6210ETTask"
+    Description: 
+  - Enabled: 0
     Title: "\u8840\u6761"
     Description: "\u4EFB\u52A1\u63CF\u8FF0"
   - Enabled: 0
@@ -34,6 +37,3 @@ MonoBehaviour:
   - Enabled: 0
     Title: "\u96C6\u6210EGamePlay\u63D2\u4EF6"
     Description: "\u96C6\u6210EGamePlay\u63D2\u4EF6"
-  - Enabled: 0
-    Title: "\u96C6\u6210ETTask"
-    Description: 

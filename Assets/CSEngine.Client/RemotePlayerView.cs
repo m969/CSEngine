@@ -1,3 +1,4 @@
+using ET;
 using UnityEngine;
 
 namespace CSEngine.Client
@@ -5,6 +6,7 @@ namespace CSEngine.Client
     public class RemotePlayerView : MonoBehaviour, IPlayerView
     {
         private RemotePlayer _player;
+        private Vector2 _lastPosition;
 
         public static RemotePlayerView Create(RemotePlayerView prefab, RemotePlayer player)
         {
@@ -17,7 +19,11 @@ namespace CSEngine.Client
         private void Update()
         {
             _player.UpdatePosition(Time.deltaTime);
-            transform.position = _player.Position;
+            if (_lastPosition != _player.Position)
+            {
+                Log.Debug($"RemotePlayerView _lastPosition={_lastPosition} Position={_player.Position}");
+                _lastPosition = transform.position = _player.Position;
+            }
             transform.rotation =  Quaternion.Euler(0f, 0f, _player.Rotation * Mathf.Rad2Deg );
         }
 
