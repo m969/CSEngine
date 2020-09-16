@@ -63,7 +63,7 @@ namespace CSEngine.Server
         {
             _serverTick = (ushort)((_serverTick + 1) % NetworkGeneral.MaxGameSequence);
             _playerManager.LogicUpdate();
-            if (_serverTick % 2 == 0)
+            //if (_serverTick % 2 == 0)
             {
                 _serverState.Tick = _serverTick;
                 _serverState.PlayerStates = _playerManager.PlayerStates;

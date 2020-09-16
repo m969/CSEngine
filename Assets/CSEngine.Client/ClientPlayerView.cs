@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 namespace CSEngine.Client
 {
@@ -17,6 +18,7 @@ namespace CSEngine.Client
             obj._player = player;
             obj._name.text = player.Name;
             obj._mainCamera = Camera.main;
+            player.HealthChangeAction += obj.OnHealthChanged;
             return obj;
         }
 
@@ -42,6 +44,11 @@ namespace CSEngine.Client
         public void Destroy()
         {
             Destroy(gameObject);
+        }
+
+        private void OnHealthChanged(byte v)
+        {
+            _healthCircle.fillAmount = v / 100f;
         }
     }
 }

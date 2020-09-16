@@ -7,7 +7,7 @@ namespace CSEngine.Client
 { 
     public class ClientPlayer : BasePlayer
     {
-        public Action<byte> HealthAction;
+        public Action<byte> HealthChangeAction;
         public override byte Health
         {
             get
@@ -16,9 +16,9 @@ namespace CSEngine.Client
             }
             set
             {
-                Debug.Log($"Health:{value}");
+                Debug.Log($"ClientPlayer Health:{value}");
                 _health = value;
-                HealthAction?.Invoke(value);
+                HealthChangeAction?.Invoke(value);
             }
         }
 
@@ -134,11 +134,6 @@ namespace CSEngine.Client
             }
 
             base.Update(delta);
-        }
-
-        public void OnHealthChanged(byte value)
-        {
-            _health = value;
         }
     }
 }

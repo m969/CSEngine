@@ -23,12 +23,6 @@ MonoBehaviour:
     SerializationNodes: []
   TaskConfigs:
   - Enabled: 0
-    Title: "\u96C6\u6210UniTask"
-    Description: "\u4EFB\u52A1\u63CF\u8FF0"
-  - Enabled: 0
-    Title: "\u96C6\u6210ETTask"
-    Description: 
-  - Enabled: 0
     Title: "\u8840\u6761"
     Description: "\u4EFB\u52A1\u63CF\u8FF0"
   - Enabled: 0

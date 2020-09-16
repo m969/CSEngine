@@ -1,5 +1,6 @@
 using CSEngine.Shared;
 using UnityEngine;
+using System;
 
 namespace CSEngine.Client
 {   
@@ -8,8 +9,22 @@ namespace CSEngine.Client
         private readonly LiteRingBuffer<PlayerState> _buffer = new LiteRingBuffer<PlayerState>(30);
         private float _receivedTime;
         private float _timer;
-        private const float BufferTime = 0.1f; //100 milliseconds
-        
+        private const float BufferTime = 0.01f; //100 milliseconds
+        public Action<byte> HealthChangeAction;
+        public override byte Health
+        {
+            get
+            {
+                return _health;
+            }
+            set
+            {
+                Debug.Log($"RemotePlayer Health:{value}");
+                _health = value;
+                HealthChangeAction?.Invoke(value);
+            }
+        }
+
         public RemotePlayer(ClientPlayerManager manager, string name, PlayerJoinedPacket pjPacket) : base(manager, name, pjPacket.InitialPlayerState.Id)
         {
             _position = pjPacket.InitialPlayerState.Position;
@@ -26,23 +41,24 @@ namespace CSEngine.Client
 
         public void UpdatePosition(float delta)
         {
-            if (_receivedTime < BufferTime || _buffer.Count < 2)
-                return;
-            var dataA = _buffer[0];
-            var dataB = _buffer[1];
+            //if (_receivedTime < BufferTime || _buffer.Count < 2)
+            //    return;
+            //var dataA = _buffer[0];
+            //var dataB = _buffer[1];
             
-            float lerpTime = NetworkGeneral.SeqDiff(dataB.Tick, dataA.Tick)*LogicTimer.FixedDelta;
-            float t = _timer / lerpTime;
-            _position = Vector2.Lerp(dataA.Position, dataB.Position, t);
-            _rotation = Mathf.Lerp(dataA.Rotation, dataB.Rotation, t);
-            _timer += delta;
-            if (_timer > lerpTime)
-            {
-                _receivedTime -= lerpTime;
-                _buffer.RemoveFromStart(1);
-                _timer -= lerpTime;
-            }
+            //float lerpTime = NetworkGeneral.SeqDiff(dataB.Tick, dataA.Tick)*LogicTimer.FixedDelta;
+            //float t = _timer / lerpTime;
+            //_position = Vector2.Lerp(dataA.Position, dataB.Position, t);
+            //_rotation = Mathf.Lerp(dataA.Rotation, dataB.Rotation, t);
+            //_timer += delta;
+            //if (_timer > lerpTime)
+            //{
+            //    _receivedTime -= lerpTime;
+            //    _buffer.RemoveFromStart(1);
+            //    _timer -= lerpTime;
+            //}
         }
+        private Vector2 _lastPosition;
 
         public void OnPlayerState(PlayerState state)
         {
@@ -51,6 +67,7 @@ namespace CSEngine.Client
             if (diff <= 0)
                 return;
 
+            //Debug.Log($"OnPlayerState {state}");
             _receivedTime += diff * LogicTimer.FixedDelta;
             if (_buffer.IsFull)
             {
@@ -60,6 +77,16 @@ namespace CSEngine.Client
                 _buffer.FastClear();
             }
             _buffer.Add(state);
+
+            if (_position != state.Position)
+            {
+                Debug.Log($"OnPlayerState _lastPosition={_lastPosition} Position={state.Position}");
+                _position = state.Position;
+            }
+            if (_rotation != state.Rotation)
+            {
+                _rotation = state.Rotation;
+            }
         }
     }
 }

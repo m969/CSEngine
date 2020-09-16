@@ -28,6 +28,7 @@ namespace CSEngine.Client
         private string _userName;
         private ServerState _cachedServerState;
         private ShootPacket _cachedShootData;
+        private PlayerHealthPacket _playerHealthPacket;
         private ushort _lastServerTick;
         private NetPeer _server;
         private ClientPlayerManager _playerManager;
@@ -48,6 +49,7 @@ namespace CSEngine.Client
             Random r = new Random();
             _cachedServerState = new ServerState();
             _cachedShootData = new ShootPacket();
+            _playerHealthPacket = new PlayerHealthPacket();
             _userName = Environment.MachineName + " " + r.Next(100000);
             LogicTimer = new LogicTimer(OnLogicUpdate);
             _writer = new NetDataWriter();
@@ -117,13 +119,18 @@ namespace CSEngine.Client
 
         private void OnShoot()
         {
-            Debug.Log($"OnShoot");
-            Debug.Log($"OnShoot");
-            Debug.Log($"OnShoot");
             var p = _playerManager.GetById(_cachedShootData.FromPlayer);
             if (p == null || p == _playerManager.OurPlayer)
                 return;
             SpawnShoot(p.Position, _cachedShootData.Hit);
+        }
+
+        private void OnHealthChanged()
+        {
+            var p = _playerManager.GetById(_playerHealthPacket.Player);
+            if (p == null)
+                return;
+            p.Health = _playerHealthPacket.Health;
         }
 
         public void SpawnShoot(Vector2 from, Vector2 to)
@@ -215,6 +222,10 @@ namespace CSEngine.Client
                 case PacketType.Shoot:
                     _cachedShootData.Deserialize(reader);
                     OnShoot();
+                    break;
+                case PacketType.Health:
+                    _playerHealthPacket.Deserialize(reader);
+                    OnHealthChanged();
                     break;
                 default:
                     Debug.Log("Unhandled packet: " + pt);
