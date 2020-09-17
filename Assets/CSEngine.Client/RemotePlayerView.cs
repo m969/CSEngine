@@ -19,7 +19,6 @@ namespace CSEngine.Client
             return obj;
         }
 
-        private Vector2 _lastPosition;
         private void Update()
         {
             _player.UpdatePosition(Time.deltaTime);
@@ -34,7 +33,14 @@ namespace CSEngine.Client
 
         private void OnHealthChanged(byte v)
         {
-            _healthCircle.fillAmount = v / 100f;
+            if (v == 0)
+            {
+                _healthCircle.fillAmount = 0f;
+            }
+            else
+            {
+                _healthCircle.fillAmount = v / 100f;
+            }
         }
     }
 }

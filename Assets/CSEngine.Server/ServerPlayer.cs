@@ -18,6 +18,11 @@ namespace CSEngine.Server
             }
             set
             {
+                if (value <= 0)
+                {
+                    _health = 0;
+                    return;
+                }
                 _health = value;
                 var packet = new PlayerHealthPacket() { Health = value, Player = Id };
                 Game.CSEngineApp.SendAll(PacketType.Health, packet);
