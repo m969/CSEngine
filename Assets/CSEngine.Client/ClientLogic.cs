@@ -53,11 +53,11 @@ namespace CSEngine.Client
             _userName = Environment.MachineName + " " + r.Next(100000);
             LogicTimer = new LogicTimer(OnLogicUpdate);
             _writer = new NetDataWriter();
-            _playerManager = new ClientPlayerManager(this);
+            G.ClientPlayerManager = _playerManager = new ClientPlayerManager(this);
             _shootsPool = new GamePool<ShootEffect>(ShootEffectContructor, 100);
 
-            _netManager = Game.CSEngineApp.LiteNet._netManager;
-            _packetProcessor = Game.CSEngineApp.LiteNet._packetProcessor;
+            _netManager = G.CSEngineApp.LiteNet._netManager;
+            _packetProcessor = G.CSEngineApp.LiteNet._packetProcessor;
             //_packetProcessor = new NetPacketProcessor();
             _packetProcessor.RegisterNestedType((w, v) => w.Put(v), reader => reader.GetVector2());
             _packetProcessor.RegisterNestedType<PlayerState>();

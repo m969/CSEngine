@@ -25,7 +25,7 @@ namespace CSEngine.Server
                 }
                 _health = value;
                 var packet = new PlayerHealthPacket() { Health = value, Player = Id };
-                Game.CSEngineApp.SendAll(PacketType.Health, packet);
+                G.CSEngineApp.SendAll(PacketType.Health, packet);
             }
         }
 

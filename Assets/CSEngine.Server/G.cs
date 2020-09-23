@@ -3,7 +3,7 @@ using CSEngine.Shared;
 
 namespace CSEngine.Server
 {
-    public class Game
+    public class G
     {
         public static CSEngineApp CSEngineApp { get; set; }
     }

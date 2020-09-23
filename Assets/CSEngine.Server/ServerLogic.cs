@@ -44,8 +44,8 @@ namespace CSEngine.Server
             //    AutoRecycle = true
             //};
 
-            _netManager = Game.CSEngineApp.LiteNet._netManager;
-            _packetProcessor = Game.CSEngineApp.LiteNet._packetProcessor;
+            _netManager = G.CSEngineApp.LiteNet._netManager;
+            _packetProcessor = G.CSEngineApp.LiteNet._packetProcessor;
             _packetProcessor.RegisterNestedType((w, v) => w.Put(v), r => r.GetVector2());
             _packetProcessor.RegisterNestedType<PlayerState>();
             _packetProcessor.SubscribeReusable<JoinPacket, NetPeer>(OnJoinReceived);

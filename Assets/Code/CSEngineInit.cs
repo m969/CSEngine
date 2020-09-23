@@ -25,11 +25,13 @@ namespace CSEngine.Client
             var args = new CSEngineArgs();
             args.netEventListener = _clientLogic;
             args.ip = "127.0.0.1";
-            Game.CSEngineApp = new CSEngineApp(args);
+            G.CSEngineApp = new CSEngineApp(args);
+            G.ClientLogic = _clientLogic;
+            G.ClientPlayerInput = GetComponent<ClientPlayerInput>();
             _clientLogic.Initialize();
 
-            Game.CSEngineApp.LiteNet._netManager.MaxConnectAttempts = 2;
-            Game.CSEngineApp.LiteNet._netManager.DisconnectTimeout = 500;
+            G.CSEngineApp.LiteNet._netManager.MaxConnectAttempts = 2;
+            G.CSEngineApp.LiteNet._netManager.DisconnectTimeout = 500;
             OnConnectClick();
         }
 
@@ -46,12 +48,12 @@ namespace CSEngine.Client
             _uiObject.SetActive(true);
             _disconnectInfoField.text = info.Reason.ToString();
 
-            if (Server.Game.CSEngineApp == null)
+            if (Server.G.CSEngineApp == null)
             {
                 var args = new CSEngineArgs();
                 args.netEventListener = _serverLogic;
                 args.ip = "127.0.0.1";
-                Server.Game.CSEngineApp = new CSEngineApp(args);
+                Server.G.CSEngineApp = new CSEngineApp(args);
                 _serverLogic.StartServer();
 
                 OnConnectClick();
