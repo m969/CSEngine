@@ -103,7 +103,7 @@ Material:
     - _HeightBlurMode: 0
     - _HeightBlurSamples: 8
     - _HeightBlurSize: 0
-    - _HeightStrength: 0.1
+    - _HeightStrength: 0.05
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
