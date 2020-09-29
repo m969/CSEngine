@@ -21,8 +21,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SGT_Ice_2
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _METALLICSPECGLOSSMAP _NORMALMAP
+  m_Shader: {fileID: 4800000, guid: db33860adb24fd440a4cec1a57169a89, type: 3}
+  m_ShaderKeywords: _HEIGHTMAP _METALLICSPECGLOSSMAP _NORMALMAP _TESSELLATION_CLIPPING
+    _TESSELLATION_DISTANCE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -35,7 +36,7 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 42eb131cf6f2a544685c728a6b811731, type: 3}
-        m_Scale: {x: 4, y: 2}
+        m_Scale: {x: 8, y: 8}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: c36041471c988114698e440685047cc4, type: 3}
@@ -57,6 +58,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 4, y: 2}
         m_Offset: {x: 0, y: 0}
+    - _HeightMap:
+        m_Texture: {fileID: 2800000, guid: e358684ecf8610b4ebee3b6c1016ef43, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 42eb131cf6f2a544685c728a6b811731, type: 3}
         m_Scale: {x: 4, y: 2}
@@ -77,6 +82,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TessellationMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
@@ -86,9 +95,16 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _GeometryCustomST: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _HeightBase: 0
+    - _HeightBlurGaussStandardDeviation: 0.02
+    - _HeightBlurMode: 0
+    - _HeightBlurSamples: 8
+    - _HeightBlurSize: 0
+    - _HeightStrength: 0.02
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -100,7 +116,21 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _TessellationDistanceMax: 10
+    - _TessellationDistanceMin: 1
+    - _TessellationEdgeDistanceOffset: 0.5
+    - _TessellationEdgeLength: 6
+    - _TessellationFactor: 1
+    - _TessellationFactorMax: 1
+    - _TessellationFactorMin: 1
+    - _TessellationMode: 2
+    - _TessellationPhongShape: 0
+    - _TessellationPostPro: 0
+    - _TessellationScale: 1
+    - _TessellationTriangleClipBias: 0
+    - _TessellationTriangleClipping: 1
     - _UVSec: 0
+    - _VertexColorMode: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

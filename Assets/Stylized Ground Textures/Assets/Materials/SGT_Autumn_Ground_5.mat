@@ -86,12 +86,12 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HeightBase: 0.587
+    - _HeightBase: 0
     - _HeightBlurGaussStandardDeviation: 0.02
     - _HeightBlurMode: 0
     - _HeightBlurSamples: 8
     - _HeightBlurSize: 0
-    - _HeightStrength: 0.1
+    - _HeightStrength: 0.05
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -105,7 +105,7 @@ Material:
     - _Surface: 0
     - _TessellationDistanceMax: 10
     - _TessellationDistanceMin: 1
-    - _TessellationEdgeDistanceOffset: 0.5
+    - _TessellationEdgeDistanceOffset: 0
     - _TessellationEdgeLength: 6
     - _TessellationFactor: 1
     - _TessellationFactorMax: 1

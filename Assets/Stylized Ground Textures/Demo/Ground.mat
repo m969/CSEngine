@@ -21,8 +21,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ground
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _METALLICSPECGLOSSMAP _NORMALMAP
+  m_Shader: {fileID: 4800000, guid: db33860adb24fd440a4cec1a57169a89, type: 3}
+  m_ShaderKeywords: _HEIGHTMAP _METALLICSPECGLOSSMAP _NORMALMAP _TESSELLATION_CLIPPING
+    _TESSELLATION_EDGE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -60,6 +61,10 @@ Material:
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 50, y: 50}
+        m_Offset: {x: 0, y: 0}
+    - _HeightMap:
+        m_Texture: {fileID: 2800000, guid: 52a80580594996f4ebcd7477df4fd029, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 774cf912f8e434640be36b85f5feec4b, type: 3}
@@ -133,6 +138,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TessellationMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
@@ -144,10 +153,17 @@ Material:
     - _EnableHeightBlend: 0
     - _EnableInstancedPerPixelNormal: 1
     - _EnvironmentReflections: 1
+    - _GeometryCustomST: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.712
     - _GlossinessSource: 0
     - _GlossyReflections: 1
+    - _HeightBase: 0
+    - _HeightBlurGaussStandardDeviation: 0.02
+    - _HeightBlurMode: 0
+    - _HeightBlurSamples: 8
+    - _HeightBlurSize: 0
+    - _HeightStrength: 0.1
     - _HeightTransition: 0
     - _Metallic: 0
     - _Metallic0: 0
@@ -173,7 +189,21 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _TessellationDistanceMax: 10
+    - _TessellationDistanceMin: 1
+    - _TessellationEdgeDistanceOffset: 0.5
+    - _TessellationEdgeLength: 6
+    - _TessellationFactor: 1
+    - _TessellationFactorMax: 1
+    - _TessellationFactorMin: 1
+    - _TessellationMode: 1
+    - _TessellationPhongShape: 0
+    - _TessellationPostPro: 0
+    - _TessellationScale: 1
+    - _TessellationTriangleClipBias: 0
+    - _TessellationTriangleClipping: 1
     - _UVSec: 0
+    - _VertexColorMode: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
