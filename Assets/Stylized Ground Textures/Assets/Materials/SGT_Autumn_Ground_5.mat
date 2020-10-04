@@ -86,7 +86,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HeightBase: 0
+    - _HeightBase: -0.15
     - _HeightBlurGaussStandardDeviation: 0.02
     - _HeightBlurMode: 0
     - _HeightBlurSamples: 8

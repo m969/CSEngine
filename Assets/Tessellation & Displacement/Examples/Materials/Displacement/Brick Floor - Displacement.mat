@@ -101,6 +101,7 @@ Material:
     - _TessellationScale: 1
     - _TessellationTriangleClipBias: 0
     - _TessellationTriangleClipping: 0
+    - _VertexColorMode: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
