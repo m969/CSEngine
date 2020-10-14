@@ -7,7 +7,7 @@ using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using Sirenix.Utilities.Editor;
 
-namespace TaskListConfig.Editor
+namespace ToDoListEditor
 {
     [Serializable]
     public class TaskConfig
@@ -32,7 +32,7 @@ namespace TaskListConfig.Editor
         public List<TaskConfig> TaskConfigs = new List<TaskConfig>();
     }
 
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
     [CustomEditor(typeof(TaskListConfigObject))]
     public class TaskListConfigObjectInspector : OdinEditor
     {
@@ -87,5 +87,5 @@ namespace TaskListConfig.Editor
             serializedObject.UpdateIfRequiredOrScript();
         }
     }
-#endif
+//#endif
 }
