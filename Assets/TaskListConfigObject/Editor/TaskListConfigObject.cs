@@ -7,7 +7,7 @@ using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using Sirenix.Utilities.Editor;
 
-namespace CSEngine.Editor
+namespace TaskListConfig.Editor
 {
     [Serializable]
     public class TaskConfig
@@ -22,13 +22,13 @@ namespace CSEngine.Editor
         [HideLabel]
         [TextArea(2, 4)]
         [GUIColor(1,1,1,.8f)]
-        public string Description = "任务描述";
+        public string Description = "描述";
     }
 
-    [CreateAssetMenu(fileName ="任务计划列表", menuName = "任务计划列表")]
+    [CreateAssetMenu(fileName = "任务清单", menuName = "任务清单")]
     public class TaskListConfigObject : SerializedScriptableObject
     {
-        [LabelText("任务计划列表")]
+        [LabelText("任务清单")]
         public List<TaskConfig> TaskConfigs = new List<TaskConfig>();
     }
 
@@ -38,9 +38,9 @@ namespace CSEngine.Editor
     {
         protected override void OnHeaderGUI()
         {
-            //base.OnHeaderGUI();
+            base.OnHeaderGUI();
             EditorGUILayout.Space(10);
-            SirenixEditorGUI.Title("任务清单列表", "", TextAlignment.Center, false, boldLabel: true);
+            SirenixEditorGUI.Title("任务清单", "", TextAlignment.Center, false, boldLabel: true);
         }
 
         public override void OnInspectorGUI()
@@ -54,8 +54,8 @@ namespace CSEngine.Editor
 
                 EditorGUILayout.BeginVertical();
 
-                var visible = EditorPrefs.GetBool($"{taskConfig.GetHashCode()}", false);
-                var toggeled = SirenixEditorGUI.BeginToggleGroup(taskConfig, ref taskConfig.Enabled, ref visible, taskConfig.Title);
+                var visible = EditorPrefs.GetBool($"{taskConfig.GetHashCode().ToString()}", false);
+                var toggeled = SirenixEditorGUI.BeginToggleGroup(taskConfig, ref taskConfig.Enabled, ref visible, taskConfig.Title, 0.3f);
                 if (toggeled)
                 {
                     taskConfig.Title = EditorGUILayout.TextField(taskConfig.Title);
@@ -76,11 +76,15 @@ namespace CSEngine.Editor
             if (remove != null)
             {
                 taskListConfigObject.TaskConfigs.Remove(remove);
+                EditorUtility.SetDirty(taskListConfigObject);
             }
-            if (GUILayout.Button("+"))
+            if (GUILayout.Button("+ 添加任务"))
             {
                 taskListConfigObject.TaskConfigs.Add(new TaskConfig());
+                EditorUtility.SetDirty(taskListConfigObject);
             }
+            serializedObject.ApplyModifiedProperties();
+            serializedObject.UpdateIfRequiredOrScript();
         }
     }
 #endif
