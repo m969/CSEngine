@@ -37,3 +37,6 @@ MonoBehaviour:
   - Enabled: 0
     Title: "demo\u573A\u666F"
     Description: "\u573A\u666F\n\u82F1\u96C4\n\u602A\u7269"
+  - Enabled: 0
+    Title: Hero Builder Editor
+    Description: "\u82F1\u96C4\u6784\u5EFA\u7F16\u8F91\u5668"
