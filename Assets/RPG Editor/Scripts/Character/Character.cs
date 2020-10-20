@@ -32,15 +32,19 @@ namespace RPGEditor
         [LabelText(NameLabel)]
         public string Name;
 
-        [BoxGroup("基础属性")]
+        [BoxGroup(BasicAttrbuteLabel)]
         [LabelText(HealthLabel)]
         public uint Health;
 
-        [BoxGroup("基础属性")]
+        [BoxGroup(BasicAttrbuteLabel)]
+        [LabelText(PowerLabel)]
+        public uint Power;
+
+        [BoxGroup(BasicAttrbuteLabel)]
         [LabelText(AttackLabel)]
         public uint Attack;
 
-        [BoxGroup("基础属性")]
+        [BoxGroup(BasicAttrbuteLabel)]
         [LabelText(DefenseLabel)]
         public uint Defense;
 
@@ -72,6 +76,8 @@ namespace RPGEditor
         const string HealthLabel = "生命值";
         const string AttackLabel = "攻击";
         const string DefenseLabel = "防御";
+        const string PowerLabel = "能量";
+        const string BasicAttrbuteLabel = "基础属性";
         const string SurnameLabel = "姓氏";
         const string AgeLabel = "等级";
     }

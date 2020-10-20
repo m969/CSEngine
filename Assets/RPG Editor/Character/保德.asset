@@ -24,5 +24,6 @@ MonoBehaviour:
   Prefab: {fileID: 1123161434240648, guid: e2ce315c37e32fd4b9d2fd8f2d56a7d0, type: 3}
   Name: "\u4FDD\u5FB7"
   Health: 100
-  Attack: 10
+  Power: 1000
+  Attack: 8
   Defense: 5
