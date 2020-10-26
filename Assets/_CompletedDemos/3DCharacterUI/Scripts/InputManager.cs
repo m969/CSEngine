@@ -43,19 +43,26 @@ public class InputManager : MonoBehaviour
             animator.SetBool("isMoving", false);
         }
     }
-    
+
 
     void ProcessDesktopInputs()
     {
+        var h = Input.GetAxis("Horizontal");
+        var v = Input.GetAxis("Vertical");
+        if (h > 0f || v > 0f)
+        {
+            var p = transform.position + new Vector3(h, 0, v);
+            agent.SetDestination(p);
+        }
+        //return;
         //Left Click - Selection
-         if(Input.GetKeyDown(KeyCode.Mouse0))
-         {
-            if (!EventSystem.current || !EventSystem.current.IsPointerOverGameObject ())
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (!EventSystem.current || !EventSystem.current.IsPointerOverGameObject())
             {
                 RaycastAgainstTheWorld(Input.mousePosition);
             }
-         }
-
+        }
     }
 
     
